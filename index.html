@@ -24,10 +24,27 @@
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Wszystko o komputerach</title>
+            <style>
+                /* Animacja dla płynnego zmieniania tła */
+                @keyframes gradientAnimation {
+                    0% { background-position: 0% 0%; }
+                    50% { background-position: 100% 100%; }
+                    100% { background-position: 0% 0%; }
+                }
+        
+                body {
+                    margin: 0;
+                    padding: 0;
+                    height: 100%;
+                    overflow: auto; /* Pozwól na przewijanie strony */
+                    font-family: Arial, sans-serif;
+                    background: linear-gradient(135deg, #35424a, #233330, #16a085, #2b3a42);
+                    background-size: 200% 200%;
+                    animation: gradientAnimation 7s ease infinite;
+                }
+            </style>
         </head>
         <body>
-        <canvas id="starfield"></canvas>
-        
         <h1>Co to komputer?
         </h1>
         <p>
@@ -102,67 +119,6 @@
         <p>
             Komputery to nieodłączny element współczesnego świata. Ich historia, budowa i możliwości sprawiają, że są one niezwykle wszechstronnymi narzędziami, które zmieniają sposób, w jaki żyjemy, pracujemy i bawimy się. Przyszłość komputerów zapowiada się jeszcze bardziej ekscytująco, z nowymi technologiami, które mogą przekształcić nasze codzienne życie w sposób, który dzisiaj trudno sobie wyobrazić.
         </p>
-        <script defer>document.addEventListener('DOMContentLoaded', function () {
-            const canvas = document.getElementById("starfield");
-            const ctx = canvas.getContext("2d");
-
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-
-            function initStars() {
-                let stars = [];
-                let numStars = 200;
-                for (let i = 0; i < numStars; i++) {
-                    stars.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        radius: Math.random() * 1.5 + 0.5,
-                        speed: Math.random() * 0.5 + 0.2
-                    });
-                }
-                return stars;
-            }
-
-            function drawStars(stars) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "white";
-                for (let star of stars) {
-                    ctx.beginPath();
-                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-
-            function updateStars(stars) {
-                for (let star of stars) {
-                    star.y += star.speed;
-                    if (star.y > canvas.height) {
-                        star.y = 0;
-                        star.x = Math.random() * canvas.width;
-                    }
-                }
-            }
-
-            function animate(stars) {
-                drawStars(stars);
-                updateStars(stars);
-                requestAnimationFrame(function () {
-                    animate(stars);
-                });
-            }
-
-            resizeCanvas();
-            const stars = initStars();
-            animate(stars);
-
-            window.addEventListener("resize", function () {
-                resizeCanvas();
-                stars.length = 0;  // Reset stars array
-                Object.assign(stars, initStars());
-            });
-        });</script>
         </body>
         </html>
         

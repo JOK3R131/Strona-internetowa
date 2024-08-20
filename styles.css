@@ -71,7 +71,7 @@ footer {
     color: white;
     text-align: center;
     padding: 15px 0;
-    position: fixed;
+    position: static;
     width: 100%;
     bottom: 0;
     box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.3);
@@ -94,7 +94,7 @@ a {
 }
 
 a:hover {
-    color: #16a085;
+    color: #ffffff;
 }
 
 button {
