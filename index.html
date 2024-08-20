@@ -102,20 +102,18 @@
         <p>
             Komputery to nieodłączny element współczesnego świata. Ich historia, budowa i możliwości sprawiają, że są one niezwykle wszechstronnymi narzędziami, które zmieniają sposób, w jaki żyjemy, pracujemy i bawimy się. Przyszłość komputerów zapowiada się jeszcze bardziej ekscytująco, z nowymi technologiami, które mogą przekształcić nasze codzienne życie w sposób, który dzisiaj trudno sobie wyobrazić.
         </p>
-        <script>const canvas = document.getElementById("starfield");
+        <script defer>document.addEventListener('DOMContentLoaded', function () {
+            const canvas = document.getElementById("starfield");
             const ctx = canvas.getContext("2d");
-            
-            let stars = [];
-            let numStars = 200; // Liczba gwiazd
-            
-            // Dostosowanie rozmiaru canvasu do rozmiaru okna
+
             function resizeCanvas() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             }
-            
-            // Inicjalizacja gwiazd
+
             function initStars() {
+                let stars = [];
+                let numStars = 200;
                 for (let i = 0; i < numStars; i++) {
                     stars.push({
                         x: Math.random() * canvas.width,
@@ -124,10 +122,10 @@
                         speed: Math.random() * 0.5 + 0.2
                     });
                 }
+                return stars;
             }
-            
-            // Rysowanie gwiazd
-            function drawStars() {
+
+            function drawStars(stars) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = "white";
                 for (let star of stars) {
@@ -136,9 +134,8 @@
                     ctx.fill();
                 }
             }
-            
-            // Aktualizacja pozycji gwiazd
-            function updateStars() {
+
+            function updateStars(stars) {
                 for (let star of stars) {
                     star.y += star.speed;
                     if (star.y > canvas.height) {
@@ -147,26 +144,25 @@
                     }
                 }
             }
-            
-            // Animacja
-            function animate() {
-                drawStars();
-                updateStars();
-                requestAnimationFrame(animate);
+
+            function animate(stars) {
+                drawStars(stars);
+                updateStars(stars);
+                requestAnimationFrame(function () {
+                    animate(stars);
+                });
             }
-            
-            // Inicjalizacja i start animacji
+
             resizeCanvas();
-            initStars();
-            animate();
-            
-            // Obsługa zmiany rozmiaru okna
+            const stars = initStars();
+            animate(stars);
+
             window.addEventListener("resize", function () {
                 resizeCanvas();
-                stars = [];
-                initStars();
+                stars.length = 0;  // Reset stars array
+                Object.assign(stars, initStars());
             });
-            </script>
+        });</script>
         </body>
         </html>
         
