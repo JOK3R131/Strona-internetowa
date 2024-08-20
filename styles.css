@@ -40,7 +40,7 @@ footer {
     color: white;
     text-align: center;
     padding: 10px 0;
-    position: absolute;
+    position: sticky;
     width: 100%;
     bottom: 0;
 }
