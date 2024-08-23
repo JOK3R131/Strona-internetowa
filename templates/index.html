@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona Główna</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><b>Strona o komputerach</b></li>
+                <li><a href="../index.html">Strona Główna</a></li>
+                <li><a href="index.html">Chatbot</a></li>
+                <li><a href="../about.html">O stronie</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Wszystko o komputerach</title>
+            <style>
+                /* Animacja dla płynnego zmieniania tła */
+                @keyframes gradientAnimation {
+                    0% { background-position: 0% 0%; }
+                    50% { background-position: 100% 100%; }
+                    100% { background-position: 0% 0%; }
+                }
+        
+                body {
+                    margin: 0;
+                    padding: 0;
+                    height: 100%;
+                    overflow: auto; /* Pozwól na przewijanie strony */
+                    font-family: Arial, sans-serif;
+                    background: linear-gradient(135deg, #35424a, #233330, #16a085, #2b3a42);
+                    background-size: 200% 200%;
+                    animation: gradientAnimation 7s ease infinite;
+                }
+                #chat-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #chat-log {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+
+        #chat-log p {
+            margin: 5px 0;
+        }
+
+        #user-input {
+            width: calc(100% - 100px);
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #send-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #1abc9c;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        #send-button:hover {
+            background-color: #16a085;
+        }
+            </style>
+        </head>
+        <body>
+            <div id="chat-container">
+                <h2><center>Chatbot</center></h2>
+                <center><div id="chat-log"></div>
+                <input type="text" id="user-input" placeholder="Zadaj pytanie...">
+                <button id="send-button" onclick="sendMessage()">Wyślij</button></center>
+            </div>
+        
+            <script>
+                function sendMessage() {
+                    const userInput = document.getElementById('user-input').value;
+                    if (userInput.trim() === "") return;
+        
+                    const chatLog = document.getElementById('chat-log');
+                    chatLog.innerHTML += `<p><strong>Ty:</strong> ${userInput}</p>`;
+        
+                    fetch('/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ message: userInput }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        chatLog.innerHTML += `<p><strong>Chatbot:</strong> ${data.response}</p>`;
+                        document.getElementById('user-input').value = '';
+                        chatLog.scrollTop = chatLog.scrollHeight;
+                    });
+                }
+        
+                document.getElementById('user-input').addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+            </script>
+        <h1>Jak korzystać z Chatbota?</h1>
+        <ol>
+            <li>W polu tekstowym wpisz pytanie</li>
+            <li>Kliknij przycisk Wyślij</li>
+            <li>Chatbot odpowie na twoje pytanie</li>
+        </ol>
+        <h1>Miłego korzystania!</h1>
+        <p>Chatbot jest zasilany przez API od firmy Open AI dla ChatGPT. Przeznaczony jest on w celach edukacyjnych. Należy przestrzegać regulaminu dostępnego <a href="regulaminchatbot.html">tutaj (Regulamin korzystania z Chatbota)</a></p>
+        </body>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Stanisław Targański.</p>
+    </footer>
+</body>
+</html>

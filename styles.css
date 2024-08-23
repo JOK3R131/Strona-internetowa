@@ -71,7 +71,7 @@ footer {
     color: white;
     text-align: center;
     padding: 15px 0;
-    position: static;
+    position: sticky;
     width: 100%;
     bottom: 0;
     box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.3);
