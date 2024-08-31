@@ -85,43 +85,7 @@
         }
             </style>
         </head>
-        <body>
-            <div id="chat-container">
-                <h2><center>Chatbot</center></h2>
-                <center><div id="chat-log"></div>
-                <input type="text" id="user-input" placeholder="Zadaj pytanie...">
-                <button id="send-button" onclick="sendMessage()">Wyślij</button></center>
-            </div>
-        
-            <script>
-                function sendMessage() {
-                    const userInput = document.getElementById('user-input').value;
-                    if (userInput.trim() === "") return;
-        
-                    const chatLog = document.getElementById('chat-log');
-                    chatLog.innerHTML += `<p><strong>Ty:</strong> ${userInput}</p>`;
-        
-                    fetch('/chat', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ message: userInput }),
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        chatLog.innerHTML += `<p><strong>Chatbot:</strong> ${data.response}</p>`;
-                        document.getElementById('user-input').value = '';
-                        chatLog.scrollTop = chatLog.scrollHeight;
-                    });
-                }
-        
-                document.getElementById('user-input').addEventListener('keypress', function (e) {
-                    if (e.key === 'Enter') {
-                        sendMessage();
-                    }
-                });
-            </script>
+        <h1>Chatbot o tematyce strony dostepny na oficjalnej sronie OpenAI. Został on stworzony za pomocą poleceń i definicji jakie ma używać.</h1>
         <h1>Jak korzystać z Chatbota?</h1>
         <ol>
             <li>W polu tekstowym wpisz pytanie</li>
@@ -129,7 +93,7 @@
             <li>Chatbot odpowie na twoje pytanie</li>
         </ol>
         <h1>Miłego korzystania!</h1>
-        <p>Chatbot jest zasilany przez API od firmy Open AI dla ChatGPT. Przeznaczony jest on w celach edukacyjnych. Należy przestrzegać regulaminu dostępnego <a href="regulaminchatbot.html">tutaj (Regulamin korzystania z Chatbota)</a></p>
+        <p>Chatbot jest zasilany przez firmę Open AI dla ChatGPT. Przeznaczony jest on w celach edukacyjnych. Należy przestrzegać regulaminu dostępnego <a href="regulaminchatbot.html">tutaj (Regulamin korzystania z Chatbota)</a></p>
         </body>
     </main>
     

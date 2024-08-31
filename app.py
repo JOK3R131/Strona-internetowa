@@ -3,7 +3,7 @@ import openai
 import os
 from dotenv import load_dotenv
 
-# Załaduj zmienne z pliku .env, jeśli istnieje
+# Załaduj zmienne z pliku .env
 load_dotenv()
 
 app = Flask(__name__)
@@ -17,11 +17,9 @@ def chat():
     
     # Generowanie odpowiedzi z GPT-3.5
     response = openai.Completion.create(
-        engine="text-davinci-003",
+        model="text-davinci-003",  # Zmieniono z 'engine' na 'model'
         prompt=f"User: {user_input}\nAI:",
         max_tokens=150,
-        n=1,
-        stop=None,
         temperature=0.7,
     )
     
